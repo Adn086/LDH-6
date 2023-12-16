@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Passenger.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">LDH-6</a> &gt; <a href="index.source.html" class="el_package">es.ull.passengers</a> &gt; <span class="el_source">Passenger.java</span></div><h1>Passenger.java</h1><pre class="source lang-java linenums">/*
+ * ========================================================================
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * ========================================================================
+ */
+package es.ull.passengers;
+
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import es.ull.flights.Flight;
+
+/**
+ * @class Passenger
+ * @brief Representa un pasajero con identificación, nombre y código de país.
+ *
+ * Gestiona la información de un pasajero, incluyendo su asignación a vuelos.
+ * Valida el código del país y administra el vuelo asociado al pasajero.
+ */
+public class Passenger {
+
+    private String identifier;
+    private String name;
+    private String countryCode;
+    private Flight flight;
+
+    /**
+     * @brief Constructor de Passenger que asigna identificador, nombre y código de país.
+     * @param identifier Identificador del pasajero.
+     * @param name Nombre del pasajero.
+     * @param countryCode Código del país del pasajero.
+     * @throws RuntimeException Si el código del país no es válido.
+     */
+<span class="fc" id="L51">    public Passenger(String identifier, String name, String countryCode) {</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (!Arrays.asList(Locale.getISOCountries()).contains(countryCode)) {</span>
+<span class="fc" id="L53">            throw new RuntimeException(&quot;Invalid country code&quot;);</span>
+        }
+
+<span class="fc" id="L56">        this.identifier = identifier;</span>
+<span class="fc" id="L57">        this.name = name;</span>
+<span class="fc" id="L58">        this.countryCode = countryCode;</span>
+<span class="fc" id="L59">    }</span>
+
+    /**
+     * @brief Obtiene el identificador del pasajero.
+     * @return Identificador del pasajero.
+     */
+    public String getIdentifier() {
+<span class="fc" id="L66">        return identifier;</span>
+    }
+
+    /**
+     * @brief Obtiene el nombre del pasajero.
+     * @return Nombre del pasajero.
+     */
+    public String getName() {
+<span class="fc" id="L74">        return name;</span>
+    }
+
+    /**
+     * @brief Obtiene el código de país del pasajero.
+     * @return Código de país.
+     */
+    public String getCountryCode() {
+<span class="fc" id="L82">        return countryCode;</span>
+    }
+
+    /**
+     * @brief Obtiene el vuelo asignado al pasajero.
+     * @return Vuelo asignado.
+     */
+    public Flight getFlight() {
+<span class="fc" id="L90">        return flight;</span>
+    }
+
+    /**
+     * @brief Asigna al pasajero a un vuelo.
+     * @param flight El vuelo a asignar.
+     * @throws RuntimeException Si no se puede agregar o eliminar al pasajero del vuelo.
+     */
+    public void joinFlight(Flight flight) {
+<span class="fc" id="L99">        Flight previousFlight = this.flight;</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        if (null != previousFlight) {</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">            if (!previousFlight.removePassenger(this)) {</span>
+<span class="nc" id="L102">                throw new RuntimeException(&quot;Cannot remove passenger&quot;);</span>
+            }
+        }
+<span class="fc" id="L105">        setFlight(flight);</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (null != flight) {</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">            if (!flight.addPassenger(this)) {</span>
+<span class="nc" id="L108">                throw new RuntimeException(&quot;Cannot add passenger&quot;);</span>
+            }
+        }
+<span class="fc" id="L111">    }</span>
+
+    /**
+     * @brief Establece el vuelo del pasajero.
+     * @param flight El vuelo a establecer.
+     */
+    public void setFlight(Flight flight) {
+<span class="fc" id="L118">        this.flight = flight;</span>
+<span class="fc" id="L119">    }</span>
+
+    /**
+     * @brief Devuelve una representación en cadena del pasajero.
+     * @return Una cadena que representa al pasajero.
+     */
+    @Override
+    public String toString() {
+<span class="nc" id="L127">        return &quot;Passenger &quot; + getName() + &quot; with identifier: &quot; + getIdentifier() + &quot; from &quot; + getCountryCode();</span>
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
