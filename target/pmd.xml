@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.55.0" timestamp="2023-12-16T01:18:03.047">
+<file name="C:\Users\Adn\Desktop\Nueva carpeta (2)\LDH-6-main\src\main\java\es\ull\passengers\Passenger.java">
+<violation beginline="25" endline="25" begincolumn="1" endcolumn="31" rule="UnnecessaryImport" ruleset="Code Style" package="es.ull.passengers" class="Passenger" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_codestyle.html#unnecessaryimport" priority="4">
+Unused import 'java.util.regex.Matcher'
+</violation>
+<violation beginline="26" endline="26" begincolumn="1" endcolumn="31" rule="UnnecessaryImport" ruleset="Code Style" package="es.ull.passengers" class="Passenger" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_codestyle.html#unnecessaryimport" priority="4">
+Unused import 'java.util.regex.Pattern'
+</violation>
+<violation beginline="101" endline="103" begincolumn="13" endcolumn="13" rule="CollapsibleIfStatements" ruleset="Design" package="es.ull.passengers" class="Passenger" method="joinFlight" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#collapsibleifstatements" priority="3">
+These nested if statements could be combined
+</violation>
+<violation beginline="107" endline="109" begincolumn="13" endcolumn="13" rule="CollapsibleIfStatements" ruleset="Design" package="es.ull.passengers" class="Passenger" method="joinFlight" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_design.html#collapsibleifstatements" priority="3">
+These nested if statements could be combined
+</violation>
+</file>
+</pmd>
