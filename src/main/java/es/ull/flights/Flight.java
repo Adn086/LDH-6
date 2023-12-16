@@ -27,6 +27,13 @@ import java.util.regex.Pattern;
 
 import es.ull.passengers.Passenger;
 
+/**
+ * @class Flight
+ * @brief Representa un vuelo con un número específico y una cantidad limitada de asientos.
+ *
+ * Gestiona los pasajeros y sus asignaciones a un vuelo específico.
+ * Valida el número del vuelo y administra la adición y eliminación de pasajeros.
+ */
 public class Flight {
 
     private String flightNumber;
@@ -36,6 +43,12 @@ public class Flight {
     private static String flightNumberRegex = "^[A-Z]{2}\\d{3,4}$";
     private static Pattern pattern = Pattern.compile(flightNumberRegex);
 
+    /**
+     * @brief Constructor de Flight que valida y asigna el número y asientos del vuelo.
+     * @param flightNumber Número del vuelo.
+     * @param seats Número de asientos disponibles en el vuelo.
+     * @throws RuntimeException Si el número del vuelo no es válido.
+     */
     public Flight(String flightNumber, int seats) {
         Matcher matcher = pattern.matcher(flightNumber);
         if (!matcher.matches()) {
@@ -45,14 +58,28 @@ public class Flight {
         this.seats = seats;
     }
 
+    /**
+     * @brief Obtiene el número del vuelo.
+     * @return Número del vuelo.
+     */
     public String getFlightNumber() {
         return flightNumber;
     }
 
+    /**
+     * @brief Obtiene el número de pasajeros en el vuelo.
+     * @return Cantidad de pasajeros.
+     */
     public int getNumberOfPassengers() {
         return passengers.size();
     }
 
+    /**
+     * @brief Añade un pasajero al vuelo.
+     * @param passenger El pasajero a añadir.
+     * @return Verdadero si el pasajero fue añadido, falso de lo contrario.
+     * @throws RuntimeException Si no hay suficientes asientos.
+     */
     public boolean addPassenger(Passenger passenger) {
         if (getNumberOfPassengers() >= seats) {
             throw new RuntimeException("Not enough seats for flight " + getFlightNumber());
@@ -61,8 +88,14 @@ public class Flight {
         return passengers.add(passenger);
     }
 
+    /**
+     * @brief Elimina un pasajero del vuelo.
+     * @param passenger El pasajero a eliminar.
+     * @return Verdadero si el pasajero fue eliminado, falso de lo contrario.
+     */
     public boolean removePassenger(Passenger passenger) {
         passenger.setFlight(null);
         return passengers.remove(passenger);
     }
 }
+
